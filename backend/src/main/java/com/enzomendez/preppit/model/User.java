@@ -1,5 +1,7 @@
 package com.enzomendez.preppit.model;
 
+import java.util.List;
+
 public class User {
     private Long id;
     private String firstName;
@@ -7,6 +9,8 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private List<StockItem> stockItems;
+    private List<ShoppingListItem> shoppingListItems;
 
     public User() {}
 
@@ -56,6 +60,11 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPassword(String password) {
+        // TODO: Hash password in service layer
+        this.password = password;
     }
 
 }

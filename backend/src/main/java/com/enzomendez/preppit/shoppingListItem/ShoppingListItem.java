@@ -1,9 +1,22 @@
-package com.enzomendez.preppit.model;
+package com.enzomendez.preppit.shoppingListItem;
 
-import com.enzomendez.preppit.model.enums.ItemCategory;
-import com.enzomendez.preppit.model.enums.ItemPriority;
+import com.enzomendez.preppit.shared.enums.ItemCategory;
+import com.enzomendez.preppit.shared.enums.ItemPriority;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "shopping_list_item")
 public class ShoppingListItem {
+    @Id
+    @SequenceGenerator(
+            name = "shopping_list_item_sequence",
+            sequenceName = "shopping_list_item_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "shopping_list_item_sequence"
+    )
     private Long id;
     private String name;
     private ItemCategory category;

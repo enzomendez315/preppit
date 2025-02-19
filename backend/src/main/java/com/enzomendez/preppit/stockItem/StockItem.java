@@ -1,7 +1,7 @@
-package com.enzomendez.preppit.model;
+package com.enzomendez.preppit.stockItem;
 
-import com.enzomendez.preppit.model.enums.ItemCategory;
-import com.enzomendez.preppit.model.enums.ItemLocation;
+import com.enzomendez.preppit.shared.enums.ItemCategory;
+import com.enzomendez.preppit.shared.enums.ItemLocation;
 
 import java.time.LocalDate;
 

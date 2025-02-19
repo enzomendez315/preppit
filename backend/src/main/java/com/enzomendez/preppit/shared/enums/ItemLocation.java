@@ -1,4 +1,4 @@
-package com.enzomendez.preppit.model.enums;
+package com.enzomendez.preppit.shared.enums;
 
 public enum ItemLocation {
     KITCHEN,

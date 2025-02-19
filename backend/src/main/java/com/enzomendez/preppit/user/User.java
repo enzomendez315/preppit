@@ -1,4 +1,7 @@
-package com.enzomendez.preppit.model;
+package com.enzomendez.preppit.user;
+
+import com.enzomendez.preppit.shoppingListItem.ShoppingListItem;
+import com.enzomendez.preppit.stockItem.StockItem;
 
 import java.util.List;
 

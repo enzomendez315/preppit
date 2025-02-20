@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/v1/item")
+@RequestMapping(path = "/api/v1/stock-item")
 public class StockItemController {
 
     private final StockItemService itemService;

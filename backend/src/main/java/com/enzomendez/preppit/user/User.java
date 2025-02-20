@@ -2,17 +2,33 @@ package com.enzomendez.preppit.user;
 
 import com.enzomendez.preppit.shoppingListItem.ShoppingListItem;
 import com.enzomendez.preppit.stockItem.StockItem;
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
+@Table(name = "user")
 public class User {
+    @Id
+    @SequenceGenerator(
+            name = "user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
     private Long id;
     private String firstName;
     private String lastName;
     private String username;
     private String email;
     private String password;
+
+    @OneToMany()
     private List<StockItem> stockItems;
+    @OneToMany()
     private List<ShoppingListItem> shoppingListItems;
 
     public User() {}

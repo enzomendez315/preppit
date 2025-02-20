@@ -2,10 +2,23 @@ package com.enzomendez.preppit.stockItem;
 
 import com.enzomendez.preppit.shared.enums.ItemCategory;
 import com.enzomendez.preppit.shared.enums.ItemLocation;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "stock_item")
 public class StockItem {
+    @Id
+    @SequenceGenerator(
+            name = "stock_item_sequence",
+            sequenceName = "stock_item_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "stock_item_sequence"
+    )
     private Long id;
     private String name;
     private ItemCategory category;

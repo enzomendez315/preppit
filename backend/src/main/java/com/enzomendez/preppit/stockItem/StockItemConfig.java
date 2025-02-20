@@ -13,7 +13,7 @@ import java.util.List;
 public class StockItemConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(StockItemRepository repository) {
+    CommandLineRunner commandLineRunnerStockItem(StockItemRepository repository) {
         return args -> {
             StockItem tomato = new StockItem(
                     "tomato",

@@ -34,6 +34,14 @@ public class StockItemService {
         return stockItemRepository.save(stockItem);
     }
 
+    public void deleteStockItem(Long id) {
+        boolean exists = stockItemRepository.existsById(id);
+        if (!exists) {
+            throw new IllegalStateException("Stock item does not exist.");
+        }
+        stockItemRepository.deleteById(id);
+    }
+
     private String normalizeName(String name) {
         return name.trim().toLowerCase();
     }

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/v1/stock-items")
+@RequestMapping("/api/v1/stock-items")
 public class StockItemController {
 
     private final StockItemService stockItemService;
@@ -29,5 +29,10 @@ public class StockItemController {
     @PostMapping
     public StockItem createStockItem(@RequestBody StockItem stockItem) {
         return stockItemService.saveStockItem(stockItem);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteStockItem(@PathVariable Long id) {
+        stockItemService.deleteStockItem(id);
     }
 }

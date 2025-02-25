@@ -1,5 +1,6 @@
 package com.enzomendez.preppit.shoppingListItem;
 
+import com.enzomendez.preppit.item.Item;
 import com.enzomendez.preppit.shared.enums.ItemCategory;
 import com.enzomendez.preppit.shared.enums.ItemPriority;
 import jakarta.persistence.*;
@@ -18,8 +19,10 @@ public class ShoppingListItem {
             generator = "shopping_list_item_sequence"
     )
     private Long id;
-    private String name;
-    private ItemCategory category;
+
+    @ManyToOne
+    private Item item;
+
     private Boolean purchased;
     private ItemPriority priority;
     private Integer desiredQuantity;
@@ -27,26 +30,22 @@ public class ShoppingListItem {
     public ShoppingListItem() {}
 
     public ShoppingListItem(Long id,
-                            String name,
-                            ItemCategory category,
+                            Item item,
                             Boolean purchased,
                             ItemPriority priority,
                             Integer desiredQuantity) {
         this.id = id;
-        this.name = name;
-        this.category = category;
+        this.item = item;
         this.purchased = purchased;
         this.priority = priority;
         this.desiredQuantity = desiredQuantity;
     }
 
-    public ShoppingListItem(String name,
-                            ItemCategory category,
+    public ShoppingListItem(Item item,
                             Boolean purchased,
                             ItemPriority priority,
                             Integer desiredQuantity) {
-        this.name = name;
-        this.category = category;
+        this.item = item;
         this.purchased = purchased;
         this.priority = priority;
         this.desiredQuantity = desiredQuantity;
@@ -56,20 +55,12 @@ public class ShoppingListItem {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public Item getItem() {
+        return item;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ItemCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(ItemCategory category) {
-        this.category = category;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public Boolean getPurchased() {
@@ -100,8 +91,6 @@ public class ShoppingListItem {
     public String toString() {
         return "ShoppingListItem{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", category=" + category +
                 ", purchased=" + purchased +
                 ", priority=" + priority +
                 ", desiredQuantity=" + desiredQuantity +

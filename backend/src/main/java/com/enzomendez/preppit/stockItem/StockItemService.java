@@ -25,7 +25,7 @@ public class StockItemService {
     }
 
     public StockItem saveStockItem(StockItem stockItem) {
-        String normalizedName = normalizeName(stockItem.getName());
+        String normalizedName = normalizeName(stockItem.getItem().getName());
         Optional<StockItem> stockItemOptional = stockItemRepository
                 .findByNormalizedName(normalizedName);
         if (stockItemOptional.isPresent()) {

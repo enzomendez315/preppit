@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface StockItemRepository extends JpaRepository<StockItem, Long> {
-    @Query("SELECT s FROM StockItem s WHERE s.name = ?1")
+    @Query("SELECT s FROM StockItem s WHERE s.item.name = ?1")
     Optional<StockItem> findByNormalizedName(String name);
 }

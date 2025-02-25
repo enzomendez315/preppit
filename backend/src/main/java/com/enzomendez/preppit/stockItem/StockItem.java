@@ -1,5 +1,6 @@
 package com.enzomendez.preppit.stockItem;
 
+import com.enzomendez.preppit.item.Item;
 import com.enzomendez.preppit.shared.enums.ItemCategory;
 import com.enzomendez.preppit.shared.enums.ItemLocation;
 import jakarta.persistence.*;
@@ -20,57 +21,53 @@ public class StockItem {
             generator = "stock_item_sequence"
     )
     private Long id;
-    private String name;
-    private ItemCategory category;
+
+    @ManyToOne
+    private Item item;
+
     private LocalDate purchaseDate;
     private LocalDate expirationDate;
     private ItemLocation storageLocation;
+    private Integer quantity;
 
     public StockItem() {}
 
-    public StockItem(Long id, String name,
-                     ItemCategory category,
+    public StockItem(Long id,
+                     Item item,
                      LocalDate purchaseDate,
                      LocalDate expirationDate,
-                     ItemLocation storageLocation) {
+                     ItemLocation storageLocation,
+                     Integer quantity) {
         this.id = id;
-        this.name = name;
-        this.category = category;
+        this.item = item;
         this.purchaseDate = purchaseDate;
         this.expirationDate = expirationDate;
         this.storageLocation = storageLocation;
+        this.quantity = quantity;
     }
 
-    public StockItem(String name,
-                     ItemCategory category,
+    public StockItem(Item item,
                      LocalDate purchaseDate,
                      LocalDate expirationDate,
-                     ItemLocation storageLocation) {
-        this.name = name;
-        this.category = category;
+                     ItemLocation storageLocation,
+                     Integer quantity) {
+        this.item = item;
         this.purchaseDate = purchaseDate;
         this.expirationDate = expirationDate;
         this.storageLocation = storageLocation;
+        this.quantity = quantity;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public Item getItem() {
+        return item;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ItemCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(ItemCategory category) {
-        this.category = category;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public LocalDate getPurchaseDate() {
@@ -97,15 +94,22 @@ public class StockItem {
         this.storageLocation = storageLocation;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
         return "StockItem{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", category=" + category +
                 ", purchaseDate=" + purchaseDate +
                 ", expirationDate=" + expirationDate +
                 ", storageLocation=" + storageLocation +
+                ", quantity=" + quantity +
                 '}';
     }
 }

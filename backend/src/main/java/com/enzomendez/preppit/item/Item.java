@@ -18,6 +18,8 @@ public class Item {
     )
     private Long id;
     private String name;
+
+    @Enumerated(EnumType.STRING)
     private ItemCategory category;
 
     public Item() {}

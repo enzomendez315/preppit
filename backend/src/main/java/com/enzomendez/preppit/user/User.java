@@ -3,12 +3,16 @@ package com.enzomendez.preppit.user;
 import com.enzomendez.preppit.shoppingListItem.ShoppingListItem;
 import com.enzomendez.preppit.stockItem.StockItem;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
     @Id
     @SequenceGenerator(
             name = "user_sequence",
@@ -26,8 +30,12 @@ public class User {
     private String email;
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @OneToMany()
     private List<StockItem> stockItems;
+
     @OneToMany()
     private List<ShoppingListItem> shoppingListItems;
 
@@ -79,6 +87,16 @@ public class User {
         this.lastName = lastName;
     }
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        // TODO: Hash password in service layer
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -95,9 +113,29 @@ public class User {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        // TODO: Hash password in service layer
-        this.password = password;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     @Override

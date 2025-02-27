@@ -1,7 +1,6 @@
 package com.enzomendez.preppit.stockItem;
 
 import com.enzomendez.preppit.item.Item;
-import com.enzomendez.preppit.shared.enums.ItemCategory;
 import com.enzomendez.preppit.shared.enums.ItemLocation;
 import jakarta.persistence.*;
 
@@ -21,14 +20,15 @@ public class StockItem {
             generator = "stock_item_sequence"
     )
     private Long id;
+    private LocalDate purchaseDate;
+    private LocalDate expirationDate;
+    private Integer quantity;
 
     @ManyToOne
     private Item item;
 
-    private LocalDate purchaseDate;
-    private LocalDate expirationDate;
+    @Enumerated(EnumType.STRING)
     private ItemLocation storageLocation;
-    private Integer quantity;
 
     public StockItem() {}
 

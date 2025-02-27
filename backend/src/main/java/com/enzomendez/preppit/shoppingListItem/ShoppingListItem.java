@@ -19,13 +19,14 @@ public class ShoppingListItem {
             generator = "shopping_list_item_sequence"
     )
     private Long id;
+    private Boolean purchased;
+    private Integer desiredQuantity;
 
     @ManyToOne
     private Item item;
 
-    private Boolean purchased;
+    @Enumerated(EnumType.STRING)
     private ItemPriority priority;
-    private Integer desiredQuantity;
 
     public ShoppingListItem() {}
 

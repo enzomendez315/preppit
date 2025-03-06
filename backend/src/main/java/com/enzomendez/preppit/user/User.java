@@ -29,13 +29,10 @@ public class User implements UserDetails {
     private String username;
     private String email;
     private String password;
-
     @Enumerated(EnumType.STRING)
     private Role role;
-
     @OneToMany()
     private List<StockItem> stockItems;
-
     @OneToMany()
     private List<ShoppingListItem> shoppingListItems;
 
@@ -46,25 +43,29 @@ public class User implements UserDetails {
                 String lastName,
                 String username,
                 String email,
-                String password) {
+                String password,
+                Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public User(String firstName,
                 String lastName,
                 String username,
                 String email,
-                String password) {
+                String password,
+                Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public Long getId() {

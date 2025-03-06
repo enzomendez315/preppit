@@ -17,7 +17,8 @@ public class UserConfig {
                     "Mendez",
                     "enzomendez",
                     "enzo@gmail.com",
-                    "password"
+                    "password",
+                    Role.USER
             );
 
             User said = new User(
@@ -25,7 +26,8 @@ public class UserConfig {
                     "Mendez",
                     "saidmendez",
                     "said@gmail.com",
-                    "password"
+                    "password",
+                    Role.USER
             );
 
             userRepository.saveAll(List.of(enzo, said));

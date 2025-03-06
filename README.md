@@ -16,4 +16,4 @@ Before running this project locally, ensure you have the following installed:
 ### Frontend Setup
 1. Navigate to the `frontend` directory in your terminal.
 2. Run `npm install` to install the necessary dependencies.
-3. Run `npm start dev` to start the Next.js application.
+3. Run `npm run dev` to start the Next.js application.

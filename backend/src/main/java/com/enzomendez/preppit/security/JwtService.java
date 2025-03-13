@@ -1,4 +1,4 @@
-package com.enzomendez.preppit.config;
+package com.enzomendez.preppit.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

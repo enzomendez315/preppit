@@ -1,10 +1,9 @@
 package com.enzomendez.preppit.auth;
 
-import com.enzomendez.preppit.config.JwtService;
+import com.enzomendez.preppit.security.JwtService;
 import com.enzomendez.preppit.user.Role;
 import com.enzomendez.preppit.user.UserRepository;
 import com.enzomendez.preppit.user.User;
-import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

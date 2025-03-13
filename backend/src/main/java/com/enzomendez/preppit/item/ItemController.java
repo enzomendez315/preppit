@@ -2,6 +2,7 @@ package com.enzomendez.preppit.item;
 
 import com.enzomendez.preppit.shared.enums.ItemCategory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,10 +12,14 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService;
+    private final RedisTemplate<String, Item> redisTemplate;
+    private static final String STRING_KEY_PREFIX = "redi2read:items:";
+
 
     @Autowired
-    public ItemController(ItemService itemService) {
+    public ItemController(ItemService itemService, RedisTemplate<String, Item> redisTemplate) {
         this.itemService = itemService;
+        this.redisTemplate = redisTemplate;
     }
 
     @GetMapping
@@ -24,7 +29,17 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public Item getItem(@PathVariable Long id) {
-        return itemService.getItem(id);
+        // Check if item is cached
+        String key = STRING_KEY_PREFIX + id;
+        Item itemFromCache = redisTemplate.opsForValue().get(key);
+        if (itemFromCache != null) {
+            return itemFromCache;
+        }
+
+        // Retrieve item from database and cache it
+        Item item = itemService.getItem(id);
+        redisTemplate.opsForValue().set(key, item);
+        return item;
     }
 
     @PostMapping

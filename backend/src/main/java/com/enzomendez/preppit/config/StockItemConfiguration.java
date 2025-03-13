@@ -1,17 +1,9 @@
-package com.enzomendez.preppit.stockItem;
+package com.enzomendez.preppit.config;
 
-import com.enzomendez.preppit.item.Item;
-import com.enzomendez.preppit.shared.enums.ItemCategory;
-import com.enzomendez.preppit.shared.enums.ItemLocation;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.time.LocalDate;
-import java.util.List;
-
 @Configuration
-public class StockItemConfig {
+public class StockItemConfiguration {
 
 //    @Bean
 //    CommandLineRunner commandLineRunnerStockItem(StockItemRepository repository) {

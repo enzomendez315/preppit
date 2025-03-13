@@ -13,7 +13,7 @@ public class ItemController {
 
     private final ItemService itemService;
     private final RedisTemplate<String, Item> redisTemplate;
-    private static final String STRING_KEY_PREFIX = "redi2read:items:";
+    private static final String STRING_KEY_PREFIX = "preppit:items:";
 
 
     @Autowired
@@ -31,11 +31,10 @@ public class ItemController {
     public Item getItem(@PathVariable Long id) {
         // Check if item is cached
         String key = STRING_KEY_PREFIX + id;
-        Item itemFromCache = redisTemplate.opsForValue().get(key);
-        if (itemFromCache != null) {
-            return itemFromCache;
+        Item cachedItem = redisTemplate.opsForValue().get(key);
+        if (cachedItem != null) {
+            return cachedItem;
         }
-
         // Retrieve item from database and cache it
         Item item = itemService.getItem(id);
         redisTemplate.opsForValue().set(key, item);
@@ -44,7 +43,11 @@ public class ItemController {
 
     @PostMapping
     public Item createItem(@RequestBody Item item) {
-        return itemService.saveItem(item);
+        Item savedItem = itemService.saveItem(item);
+        // Cache the new item
+        String key = STRING_KEY_PREFIX + savedItem.getId();
+        redisTemplate.opsForValue().set(key, savedItem);
+        return savedItem;
     }
 
     @PutMapping("/{id}")
@@ -52,11 +55,18 @@ public class ItemController {
             @PathVariable Long id,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) ItemCategory category) {
-        return  itemService.updateItem(id, name, category);
+        Item updatedItem = itemService.updateItem(id, name, category);
+        // Update cache
+        String key = STRING_KEY_PREFIX + updatedItem.getId();
+        redisTemplate.opsForValue().set(key, updatedItem);
+        return  updatedItem;
     }
 
     @DeleteMapping("/{id}")
     public void deleteItem(@PathVariable Long id) {
-
+        itemService.deleteItem(id);
+        // Remove from cache
+        String key = STRING_KEY_PREFIX + id;
+        redisTemplate.delete(key);
     }
 }

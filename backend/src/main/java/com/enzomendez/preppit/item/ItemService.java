@@ -3,6 +3,8 @@ package com.enzomendez.preppit.item;
 import com.enzomendez.preppit.shared.enums.ItemCategory;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,7 @@ public class ItemService {
         return itemRepository.findAll();
     }
 
+    @Cacheable(value = "items", key = "#id")
     public Item getItem(Long id) {
         return itemRepository.findById(id).orElse(null);
     }
@@ -46,6 +49,7 @@ public class ItemService {
         return itemRepository.save(item);
     }
 
+    @CacheEvict(value = "items", key = "#id")
     public void deleteItem(Long id) {
         itemRepository.deleteById(id);
     }

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
-public class UserConfiguration {
+public class UserConfig {
 
     @Bean
     CommandLineRunner commandLineRunnerUser(UserRepository userRepository) {

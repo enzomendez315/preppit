@@ -3,7 +3,7 @@ package com.enzomendez.preppit.config;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class StockItemConfiguration {
+public class StockItemConfig {
 
 //    @Bean
 //    CommandLineRunner commandLineRunnerStockItem(StockItemRepository repository) {

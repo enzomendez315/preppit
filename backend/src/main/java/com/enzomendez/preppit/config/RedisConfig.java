@@ -12,7 +12,7 @@ import java.time.Duration;
 
 @Configuration
 @EnableCaching
-public class RedisConfiguration {
+public class RedisConfig {
 
     // For manual Redis operations
     // Handles connection management without manually opening and closing Redis connections
